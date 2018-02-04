@@ -1,5 +1,6 @@
 package steps;
 
+import base.BaseUtil;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -7,7 +8,14 @@ import cucumber.api.java.en.Then;
 
 import java.util.List;
 
-public class Login {
+public class LoginStep extends BaseUtil{
+
+    private BaseUtil base;
+
+    public LoginStep(BaseUtil base) {
+        this.base = base;
+    }
+
     @Given("^i navigate to app URL$")
     public void iNavigateToAppURL() {
         System.out.println("\n i navigate to app URL");
@@ -16,6 +24,7 @@ public class Login {
     @Then("^i should see home page$")
     public void iShouldSeeHomePage() {
         System.out.println("\n i should see home page");
+        System.out.println("Browser was: " + base.stepInfo);
     }
 
     @And("^i enter below login details$")
