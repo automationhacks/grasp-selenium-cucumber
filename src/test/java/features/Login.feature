@@ -5,6 +5,7 @@ Feature: Login test
     And i enter below login details
       | username | password   |
       | student  | MaharaDemo |
+    And i enter email as "user1"
     And i click login button
     Then i should see home page
 
