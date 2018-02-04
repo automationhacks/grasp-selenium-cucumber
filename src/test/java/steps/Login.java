@@ -1,44 +1,41 @@
 package steps;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Login {
     @Given("^i navigate to app URL$")
     public void iNavigateToAppURL() {
-        System.out.println("i navigate to app URL");
+        System.out.println("\n i navigate to app URL");
     }
 
     @Then("^i should see home page$")
     public void iShouldSeeHomePage() {
-        System.out.println("i should see home page");
+        System.out.println("\n i should see home page");
     }
 
     @And("^i enter below login details$")
     public void iEnterBelowLoginDetails(DataTable table) {
-
-        /*List<List<String>> data = table.raw();
-
-        System.out.println("Value of (0,0) is" + data.get(0).get(0));
-        System.out.println("Value of (0,1) is " + data.get(0).get(1));*/
-
         List<User> users = table.asList(User.class);
 
         for (User user: users) {
-            System.out.println("Username is: " + user.username);
-            System.out.println("Password is: " + user.password);
+            System.out.println("\n Username is: " + user.username);
+            System.out.println("\n Password is: " + user.password);
         }
     }
 
     @And("^i click login button$")
     public void iClickLoginButton() {
-        System.out.println("i click login button");
+        System.out.println("\n i click login button");
+    }
+
+    @And("^i enter ([^\"]*) and ([^\"]*)$")
+    public void iEnterUsernameAndPassword(String username, String password) {
+        System.out.println("\n >>> Username: " + username + " Password: " + password);
     }
 
     public class User {
