@@ -6,9 +6,12 @@ import cucumber.api.Transform;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import transform.EmailTransformer;
 
 import java.util.List;
+
 
 public class LoginStep extends BaseUtil{
 
@@ -25,7 +28,13 @@ public class LoginStep extends BaseUtil{
 
     @Then("^i should see home page$")
     public void iShouldSeeHomePage() {
-        System.out.println("\n i should see home page");
+        WebElement logo = base.driver.findElement(By.id("logo-area"));
+        if (logo.isDisplayed()) {
+            System.out.println("Successfully navigated to login page");
+        }
+        else {
+            System.out.println("Assertion failed!");
+        }
     }
 
     @And("^i enter below login details$")
@@ -33,14 +42,14 @@ public class LoginStep extends BaseUtil{
         List<User> users = table.asList(User.class);
 
         for (User user: users) {
-            System.out.println("\n Username is: " + user.username);
-            System.out.println("\n Password is: " + user.password);
+            base.driver.findElement(By.name("login_username")).sendKeys(user.username);
+            base.driver.findElement(By.id("login_login_password")).sendKeys(user.password);
         }
     }
 
     @And("^i click login button$")
     public void iClickLoginButton() {
-        System.out.println("\n i click login button");
+        base.driver.findElement(By.id("login_submit")).submit();
     }
 
     @And("^i enter ([^\"]*) and ([^\"]*)$")
