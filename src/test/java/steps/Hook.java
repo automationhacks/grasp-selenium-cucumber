@@ -4,6 +4,7 @@ import base.BaseUtil;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hook extends BaseUtil {
 
@@ -15,9 +16,12 @@ public class Hook extends BaseUtil {
 
     @Before
     public void setUpTest() {
-        // Setting instance of base with web driver instance
-        base.stepInfo = "FirefoxDriver";
-        System.out.println("\n == Launching mock browser == ");
+        // Set marionette to point to geckodriver for firefox browser
+        // Skipping below since it does not work on FF Quantum 58. Need to troubleshoot.
+//        System.setProperty("webdriver.firefox.marionette", "C:\\technical\\selenium\\drivers\\geckodriver.exe");
+//        driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "C:\\technical\\selenium\\drivers\\chromedriver.exe");
+        base.driver = new ChromeDriver();
     }
 
     @After

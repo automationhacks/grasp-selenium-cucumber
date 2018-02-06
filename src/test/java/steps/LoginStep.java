@@ -2,7 +2,6 @@ package steps;
 
 import base.BaseUtil;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.Transform;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -21,13 +20,12 @@ public class LoginStep extends BaseUtil{
 
     @Given("^i navigate to app URL$")
     public void iNavigateToAppURL() {
-        System.out.println("\n i navigate to app URL");
+        base.driver.navigate().to("https://demo.mahara.org/");
     }
 
     @Then("^i should see home page$")
     public void iShouldSeeHomePage() {
         System.out.println("\n i should see home page");
-        System.out.println("Browser was: " + base.stepInfo);
     }
 
     @And("^i enter below login details$")
