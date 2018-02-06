@@ -8,6 +8,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.HomePage;
+import pages.LoginPage;
 import transform.EmailTransformer;
 
 import java.util.List;
@@ -28,28 +30,24 @@ public class LoginStep extends BaseUtil{
 
     @Then("^i should see home page$")
     public void iShouldSeeHomePage() {
-        WebElement logo = base.driver.findElement(By.id("logo-area"));
-        if (logo.isDisplayed()) {
-            System.out.println("Successfully navigated to login page");
-        }
-        else {
-            System.out.println("Assertion failed!");
-        }
+        HomePage homePage = new HomePage(base.driver);
+        homePage.logoIsDisplayed();
     }
 
     @And("^i enter below login details$")
     public void iEnterBelowLoginDetails(DataTable table) {
         List<User> users = table.asList(User.class);
+        LoginPage loginPage = new LoginPage(base.driver);
 
         for (User user: users) {
-            base.driver.findElement(By.name("login_username")).sendKeys(user.username);
-            base.driver.findElement(By.id("login_login_password")).sendKeys(user.password);
+            loginPage.enterUserNameAndPassword(user.username, user.password);
         }
     }
 
     @And("^i click login button$")
     public void iClickLoginButton() {
-        base.driver.findElement(By.id("login_submit")).submit();
+        LoginPage loginPage = new LoginPage(base.driver);
+        loginPage.clickLogin();
     }
 
     @And("^i enter ([^\"]*) and ([^\"]*)$")
